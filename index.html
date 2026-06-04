@@ -4,653 +4,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人简历 · Java后端</title>
+    <title>个人简历 · Java后端 | 老鱼简历风格</title>
     <style>
         :root {
-            --primary: #1e2b3c;
-            --accent: #2d7fc1;
-            --accent-light: #e8f0fe;
-            --bg: #f4f7fa;
-            --white: #ffffff;
-            --text: #2c3e50;
-            --text-light: #5a6c7d;
-            --border: #dce3ea;
-            --shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-            --radius: 8px;
-            --tag-bg: #eef2f6;
-            --tag-text: #3b4b5e;
+            --title-blue: #4078e8;
+            /*标题深蓝竖线*/
+            --title-bg-blue: #e5f0ff;
+            /*标题栏浅蓝色背景*/
+            --bg-page: #ffffff;
+            --text-main: #222222;
+            --text-gray: #555555;
+            --border-line: #dde3ee;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "Microsoft YaHei", PingFang SC, Helvetica, sans-serif;
         }
 
-        .sidebar .info-list .icon {
-            flex-shrink: 0;
-            width: 18px;
-            text-align: center;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .sidebar .info-list a {
-            color: #b0d4f1;
-            text-decoration: none;
-            transition: all 0.2s;
-            border-bottom: 1px solid transparent;
-        }
-
-        .sidebar .info-list a:hover {
-            color: #ffffff;
-            border-bottom-color: #b0d4f1;
-        }
-
-        /* 头像 */
-        .sidebar .avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
-            margin: 0 auto 14px;
+        body {
+            background: #f7f8fa;
+            padding: 30px 20px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            user-select: none;
-            color: #ffffff;
+        }
+
+        .resume-wrap {
+            width: 840px;
+            background: var(--bg-page);
+            padding: 32px 40px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        /*=====头部个人信息 头像+姓名基础信息=====*/
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+
+        .header-info-left {
+            flex: 1;
+        }
+
+        .header-info-left h1 {
+            font-size: 22px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .header-info-left .desc-job {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+        }
+
+        .header-info-left .contact-text {
+            font-size: 13px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .header-info-left .contact-text a {
+            color: #005fc9;
+            text-decoration: none;
+        }
+
+        /* 统一内容区链接样式，与头部联系方式一致（字号与加重） */
+        .content-list a,
+        .project-desc a,
+        .exp-date a {
+            color: #005fc9;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .header-avatar {
+            width: 92px;
+            height: 92px;
+            border: 1px solid var(--border-line);
             overflow: hidden;
         }
 
-        .sidebar .avatar img {
+        .header-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-            background-color: #e6ecf3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 32px 20px;
-            color: var(--text);
-            line-height: 1.6;
+        /*=====统一板块样式：标题整行浅蓝色背景+左侧深蓝小竖条=====*/
+        .resume-section {
+            margin-bottom: 24px;
         }
 
-        .resume-container {
-            width: 1000px;
-            min-height: 1130px;
-            background: var(--white);
-            box-shadow: var(--shadow);
-            border-radius: 4px;
-            display: flex;
-            overflow: hidden;
-        }
-
-        /* ========== 左侧栏 ========== */
-        .sidebar {
-            width: 280px;
-            background: var(--primary);
-            color: #f0f4fa;
-            padding: 38px 24px 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-            flex-shrink: 0;
-        }
-
-        .sidebar .avatar-area {
-            text-align: center;
-        }
-
-        .sidebar .avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
-            margin: 0 auto 14px;
+        .section-title-bar {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            user-select: none;
-            color: #ffffff;
+            margin-bottom: 12px;
+            background: var(--title-bg-blue);
+            padding: 6px 10px;
+            border-radius: 3px;
         }
 
-        .sidebar .name {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
-            color: #ffffff;
+        .title-blue-block {
+            width: 5px;
+            height: 20px;
+            background: var(--title-blue);
+            margin-right: 8px;
         }
 
-        .sidebar .title-role {
-            font-size: 13px;
-            color: #b0c7dd;
-            letter-spacing: 1px;
-            font-weight: 400;
-            background: rgba(255, 255, 255, 0.08);
-            display: inline-block;
-            padding: 3px 14px;
-            border-radius: 20px;
-            margin-top: 4px;
+        .section-title-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #222;
         }
 
-        .sidebar .section-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            font-weight: 600;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 4px;
-            color: #cfdeef;
-        }
-
-        .sidebar .info-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .sidebar .info-list li {
-            font-size: 13px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            color: rgba(255, 255, 255, 0.88);
-            word-break: break-all;
-        }
-
-        .sidebar .info-list .icon {
-            flex-shrink: 0;
-            width: 18px;
-            text-align: center;
+        .sub-title {
             font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .sidebar .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
-
-        .sidebar .skill-tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            letter-spacing: 0.4px;
-            color: #e3ecf7;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            transition: all 0.2s;
-        }
-
-        .sidebar .skill-tag:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .sidebar .edu-item {
-            margin-top: 2px;
-        }
-
-        .sidebar .edu-item .school {
             font-weight: 600;
-            font-size: 14px;
-            color: #ffffff;
+            color: var(--title-blue);
+            margin: 8px 0 6px 0;
         }
 
-        .sidebar .edu-item .major {
-            font-size: 12.5px;
-            color: #cbd8e8;
-            margin: 2px 0;
+        /*=====内容列表=====*/
+        .content-list {
+            padding-left: 14px;
         }
 
-        .sidebar .edu-item .date {
-            font-size: 11px;
-            color: #9aafc4;
+        .content-item {
+            margin-bottom: 10px;
+            font-size: 13.5px;
+            color: var(--text-gray);
+            line-height: 1.65;
         }
 
-        /* ========== 右侧主体 ========== */
-        .main-content {
-            flex: 1;
-            padding: 34px 30px 30px 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-            background: var(--white);
+        .content-item strong {
+            color: #222;
         }
 
-        .main-content .section-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border);
-            position: relative;
-        }
-
-        .main-content .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 36px;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 1px;
-        }
-
-        .main-content .section-header .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-            flex-shrink: 0;
-        }
-
-        .main-content .section-header h3 {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-
-        .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-top: 4px;
-        }
-
-        .tag {
-            background: var(--tag-bg);
-            color: var(--tag-text);
-            padding: 5px 14px;
-            border-radius: 4px;
-            font-size: 12.5px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            transition: background 0.2s;
-        }
-
-        .tag.accent {
-            background: var(--accent-light);
-            color: #1f5b8c;
-            font-weight: 600;
-        }
-
-        /* 时间线项目 */
-        .timeline-item {
-            margin-bottom: 18px;
-            padding-left: 16px;
-            border-left: 3px solid #dce6f2;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -7px;
-            top: 8px;
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: white;
-            border: 2.5px solid var(--accent);
-            box-shadow: 0 0 0 2px white;
-        }
-
-        .timeline-header {
+        /*=====经历条目（时间靠右）=====*/
+        .exp-item-top {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .timeline-title {
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--text);
-        }
-
-        .timeline-sub {
-            font-size: 13px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .timeline-date {
-            font-size: 12px;
-            color: #8a98a8;
-            white-space: nowrap;
-        }
-
-        .timeline-desc {
-            margin-top: 6px;
-            font-size: 13.5px;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-
-        .timeline-desc ul {
-            padding-left: 18px;
-            margin-top: 4px;
-        }
-
-        .timeline-desc ul li {
             margin-bottom: 5px;
         }
 
-        .highlight-text {
-            color: var(--accent);
-            font-weight: 600;
+        .exp-name {
+            font-weight: bold;
+            font-size: 14px;
         }
 
-        .project-tag {
-            background: #edf2f9;
-            color: #2c5282;
-            font-size: 11.5px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-left: 6px;
+        .exp-date {
+            font-size: 13px;
+            color: #777;
         }
 
+        .exp-date a {
+            color: #005fc9;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /*=====项目内容缩进=====*/
+        .project-desc ul {
+            padding-left: 18px;
+            margin-top: 6px;
+        }
+
+        .project-desc li {
+            font-size: 13.5px;
+            line-height: 1.6;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        /*高亮数据颜色*/
+        .data-high {
+            color: #dd3333;
+            font-weight: 500;
+        }
+
+        /*打印适配*/
         @media print {
             body {
-                background: white;
                 padding: 0;
+                background: #fff;
             }
 
-            .resume-container {
+            .resume-wrap {
                 box-shadow: none;
-                border-radius: 0;
                 width: 100%;
+                padding: 20px;
             }
 
-            .sidebar {
+            .section-title-bar {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-            }
-        }
-
-        @media screen and (max-width: 820px) {
-            .resume-container {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .sidebar {
-                width: 100%;
-                padding: 24px 20px;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 20px;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .sidebar .section-title {
-                width: 100%;
-                text-align: center;
-            }
-
-            .main-content {
-                padding: 24px 18px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="resume-container">
-
-        <!-- ==================== 左侧栏 ==================== -->
-        <aside class="sidebar">
-            <div class="avatar-area">
-                <div class="avatar">
-                    <img src="https://yangjianbucket.oss-cn-heyuan.aliyuncs.com/52b8c58e19e282e47b10e5e68a09203f.jpg"
-                        alt="头像">
+    <div class="resume-wrap">
+        <!--头部信息：姓名、联系方式、头像-->
+        <div class="resume-header">
+            <div class="header-info-left">
+                <h1>阳 健</h1>
+                <div class="desc-job">男 | 24岁 | Java后端开发（具备 AI Agent 能力） | 1年开发经验</div>
+                <div class="contact-text">
+                    手机：185-7396-7931｜邮箱：3259802688@qq.com<br>
+                    个人博客：<a href="https://blog.ouyangjian.com" target="_blank">blog.ouyangjian.com</a>｜Github：<a
+                        href="https://github.com/oyj135" target="_blank">github.com/oyj135</a>
                 </div>
-                <div class="name">阳 健</div>
-                <div class="title-role">Java 后端开发</div>
-            </div>
-
-            <!-- 基本信息 -->
-            <div>
-                <div class="section-title">联系方式</div>
-                <ul class="info-list">
-                    <li><span class="icon">📞</span> 185-7396-7931</li>
-                    <li><span class="icon">✉️</span> 3259802688@qq.com</li>
-                    <li><span class="icon">🔗</span> <a href="http://resume.ouyangjian.com">在线简历</a></li>
-                    <li><span class="icon">🔗</span> <a href="https://github.com/oyj135" target="_blank">github</a></li>
-                    <li><span class="icon">🔗</span> <a href="https://blog.ouyangjian.com" target="_blank">个人博客</a></li>
-                </ul>
-            </div>
-
-            <!-- 教育背景（侧边栏突出校招） -->
-            <div>
-                <div class="section-title">教育背景</div>
-                <div class="edu-item">
-                    <div class="school">吉首大学张家界学院</div>
-                    <div class="major">软件工程 · 全日制本科</div>
-                    <div class="date">2021.09 — 2025.06</div>
+                <div class="contact-text">
+                    求职意向：Java后端开发｜期望薪资8k-12k｜期望城市杭州 | 离校，随时到岗
                 </div>
             </div>
+            <div class="header-avatar">
+                <img src="https://yangjianbucket.oss-cn-heyuan.aliyuncs.com/52b8c58e19e282e47b10e5e68a09203f.jpg"
+                    alt="头像">
+            </div>
+        </div>
 
-            <!-- 专业技能 -->
-            <div>
-                <div class="section-title">技术栈</div>
-                <div class="skill-tags">
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">Spring</span>
-                    <span class="skill-tag">Spring Boot</span>
-                    <span class="skill-tag">MyBatis</span>
-                    <span class="skill-tag">MyBatis Plus</span>
-                    <span class="skill-tag">MySQL</span>
-                    <span class="skill-tag">Redis</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">Git</span>
+        <!--教育经历-->
+        <div class="resume-section">
+            <div class="section-title-bar">
+                <span class="title-blue-block"></span>
+                <span class="section-title-text">教育经历</span>
+            </div>
+            <div class="content-list">
+                <div class="content-item">
+                    <strong>吉首大学张家界学院 | 软件工程 | 本科</strong> ｜ 2021.09 - 2025.06
+                </div>
+                <div class="content-item">
+                    CET-4，在校夯实计算机基础、数据结构、操作系统等专业课基础
                 </div>
             </div>
+        </div>
 
-            <!-- 证书 & 语言 -->
-            <div>
-                <div class="section-title">技能</div>
-                <ul class="info-list">
-                    <li>🏅 CET-4</li>
-                </ul>
+        <!--专业技能-->
+        <div class="resume-section">
+            <div class="section-title-bar">
+                <span class="title-blue-block"></span>
+                <span class="section-title-text">专业技能</span>
             </div>
+            <div class="content-list">
+                <div class="sub-title">开发技术</div>
+                <div class="content-item">• 掌握Java基础8+新特性、集合、Lambda、注解，遵循阿里Java开发规范，熟练Hutool、Lombok等工具库提升开发效率</div>
+                <div class="content-item">• 熟练SpringBoot + MyBatis-Plus开发后端项目，可独立搭建RESTful接口、分层架构，整合各类中间件</div>
+                <div class="content-item">• 熟悉MySQL库表设计、索引优化、SQL调优，掌握Redis常用数据结构与缓存使用方案</div>
+                <div class="content-item">• 熟悉COS对象存储、CDN文件处理；掌握Linux部署、Nginx反向代理与负载均衡配置</div>
+                <div class="content-item">• 熟悉 Docker 容器化和 Nginx 反向代理部署，能编写 Dockerfile 打包项目并通过 Serverless 平台快速上线</div>
+                <div class="content-item">• 熟练Git/Maven/Swagger等开发工具，可借助AI工具快速排错、提升项目开发效率</div>
 
-            <!-- 自我评价 -->
-            <div>
-                <div class="section-title">自我评价</div>
-                <ul class="info-list" style="gap:6px;">
-                    <li style="font-size:12.5px;">🧠 具备良好的计算机基础与良好的工程化思维。</li>
-                    <li style="font-size:12.5px;">🤝 具备扎实的 Java 基础与面向对象编程思想，熟练掌握 Spring Boot、MyBatis 等主流框架，拥有完整的项目开发与部署经验。</li>
-                    <li style="font-size:12.5px;">🚀 具备良好的团队合作精神，善于与团队成员进行有效的沟通与协作。</li>
-                    <li style="font-size:12.5px;">📝 能够利用GitHub Issues区、AI工具、搜索引擎、Stack Overflow等自主解决问题。</li>
-                    <li style="font-size:12.5px;">📝 对新技术保持敏感，期待在后端开发领域持续深耕，为团队创造价值。</li>
-                </ul>
+                <div class="sub-title">AI 应用开发</div>
+                <div class="content-item">• 了解AI大模型对接开发，可独立封装大模型接口，实现AI能力集成进业务系统</div>
+                <div class="content-item">• 掌握 Prompt 工程和优化技巧，能基于 PGvector 向量数据库构建 RAG 知识库，实现文档 ETL、向量检索和查询增强的完整流程</div>
+                <div class="content-item">• 能利用 Cursor / Claude Code / GitHub Copilot 等 AI 编程工具高效开发项目</div>
+                <div class="content-item">• 熟悉 Vibe Coding、SDD、Harness Engineering 等多种 AI 编程模式，能利用 Spec-Kit、OpenSpec
+                    等工具驱动 AI 完成大型项目</div>
             </div>
-        </aside>
+        </div>
 
-        <!-- ==================== 右侧主体 ==================== -->
-        <main class="main-content">
+        <!--工作经历（无工作可隐藏，保留结构）-->
 
-            <!-- 求职意向 -->
-            <div class="section">
-                <div class="section-header">
-                    <span class="dot"></span>
-                    <h3>求职意向</h3>
-                </div>
-                <div class="tag-row">
-                    <span class="tag accent">Java 后端开发</span>
-                    <span class="tag">期望薪资：8k - 12k</span>
-                    <span class="tag">期望城市：杭州</span>
-                    <span class="tag">可立即到岗</span>
-                </div>
+        <!--项目经历-->
+        <div class="resume-section">
+            <div class="section-title-bar">
+                <span class="title-blue-block"></span>
+                <span class="section-title-text">项目经历</span>
             </div>
-
-            <!-- 专业技能 -->
-            <div class="section">
-                <div class="section-header">
-                    <span class="dot"></span>
-                    <h3>专业技能</h3>
+            <div class="content-list">
+                <div class="exp-item-top">
+                    <span class="exp-name">星辰云图库平台 | Vue+SpringBoot+Redis+COS+AI+WebSocket</span>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        熟悉 Java 特性，如集合类、异常处理、Lambda 编程、自定义注解等，遵循阿里 Java 开发规范，保证项目代码质量。
-                    </div>
+                <div class="exp-item-top">
+                    <span class="exp-date"><a href="http://picture.ouyangjian.com"
+                            target="_blank">在线地址：picture.ouyangjian.com</a></span>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        熟悉 Java 常用类库，如 Hutool 工具库、Lombok 注解、Logback 日志框架等，提升开发效率与代码可维护性。
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        熟练使用 Spring Boot 框架，能够整合 MyBatis-Plus、WebSocket等框架，实现高效的数据访问层开发，快速构建 RESTful API 服务。
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        熟悉 MySQL 数据库及库表设计，能够通过索引优化、SQL 调优等方式提升查询性能。
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        了解 Redis 缓存技术的基本原理及常用数据结构。 
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        掌握腾讯云 COS 对象存储与 CDN 加速技术，具备文件上传下载及图片处理能力。
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        了解 AI 大模型集成开发，能够独立封装通用 AI 模块实现模型对接。
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        熟悉 Linux 环境下的项目部署，熟悉 Nginx 反向代理配置，能够解决跨域问题并实现负载均衡。
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-desc">
-                        熟练使用 Git、Maven、Swagger、浏览器开发者工具、IDEA Http Client 等开发工具，并能借助 AI 工具提升开发效率。
-                    </div>
-                </div>
-            </div>
-
-            <!-- 星辰云图库平台开发 -->
-            <div class="timeline-item">
-                <div class="section-header">
-                    <span class="dot"></span>
-                    <h3>项目经历</h3>
-                </div>
-                <div class="timeline-header">
-                    <span class="timeline-title">星辰云图库平台 <span class="project-tag">后端开发</span></span>
-                    <span style="display: flex; align-items: center; gap: 8px;">
-                        <a href="http://picture.ouyangjian.com" target="_blank"
-                            style="font-size: 12px; color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent);">
-                            <strong>🔗 在线访问</strong></a>
-                    </span>
-                </div>
-                <div class="timeline-sub" style="margin-top:2px;">Spring Boot + Redis + COS + AI + WebSocket</div>
-
-                <div class="timeline-desc">
-                    <strong>项目描述：</strong>
-                    基于 Spring Boot + Redis + COS + AI + WebSocket 的图片管理与协作平台，
-                    支持公共图库、私有图库及团队共享空间，具备图片上传、检索、审核、分析及多人实时协同编辑能力。
+                <div class="project-desc">
+                    <strong>项目简介：</strong>基于SpringBoot的云端图片协作管理平台，支持公有/私有图库、团队空间、图片检索、AI扩图、多人协同编辑。
                     <ul>
-                        <li><span class="highlight-text">核心开发：</span>
-                            基于 Spring Boot + MyBatis Plus 构建业务系统，实现用户、图片、空间等模块 CRUD；
-                            使用 LambdaQueryWrapper 构建动态 SQL，提升开发效率。
+                        <li><strong>架构与CRUD：</strong>MyBatis-Plus实现全模块业务CRUD，Lambda动态SQL简化多条件查询，设计用户/图片/空间核心数据表，联合索引优化查询
                         </li>
-
-                        <li><span class="highlight-text">系统设计：</span>
-                            设计用户、图片、空间、空间成员等核心表结构；
-                            图片标签采用 JSON 存储，空间成员表增加联合索引提升检索性能。
-                        </li>
-
-                        <li><span class="highlight-text">通用能力：</span>
-                            封装统一响应结构、全局异常处理（@RestControllerAdvice）；
-                            使用 WebMvcConfigurer 实现全局 CORS；
-                            通过 Jackson 自定义序列化解决 Long 精度丢失问题。
-                        </li>
-
-                        <li><span class="highlight-text">安全与权限：</span>
-                            使用 MD5+盐值加密用户密码；
-                            基于 Spring AOP + 自定义注解实现权限校验；
-                            使用 Sa-Token 实现 RBAC 权限控制。
-                        </li>
-
-                        <li><span class="highlight-text">存储与上传：</span>
-                            基于 COS 封装文件上传下载服务；
-                            利用数据万象自动解析图片信息。
-                        </li>
-
-                        <li><span class="highlight-text">性能优化：</span>
-                            使用 Redis + Caffeine 构建多级缓存;
-                            随机过期时间降低缓存雪崩风险。
-                        </li>
-
-                        <li><span class="highlight-text">业务功能：</span>
-                            实现图片搜索（多维条件组合）、以图搜图、颜色搜图；
-                            支持批量编辑、空间分析（group by 聚合统计）。
-                        </li>
-
-                        <li><span class="highlight-text">协同编辑：</span>
-                            基于 WebSocket 实现多人实时协作；
-                        </li>
-
-                        <li><span class="highlight-text">架构与稳定性：</span>
-                            使用 TransactionTemplate 保证事务一致性；
-                            利用 @Lazy 解决循环依赖问题。
-                        </li>
-
-                        <li><span class="highlight-text">AI能力：</span>
-                            基于阿里云百炼模型封装 AI 扩图服务，
-                            采用异步任务轮询机制管理任务状态。
-                        </li>
-
-                        <li><span class="highlight-text">部署上线：</span>
-                            基于 Linux + 宝塔部署项目；
-                            使用 Nginx 反向代理解决跨域问题。
-                        </li>
+                        <li><strong>统一工程封装：</strong>全局异常@RestControllerAdvice、统一返回体、跨域CORS配置，Jackson序列化解决Long精度丢失</li>
+                        <li><strong>权限安全：</strong>MD5加盐密码加密，自定义注解+AOP切面鉴权，Sa-Token实现RBAC细粒度权限</li>
+                        <li><strong>文件存储：</strong>封装腾讯COS上传SDK，依托数据万象自动解析图片元信息，实现批量上传、云端管理</li>
+                        <li><strong>性能优化：</strong>Redis+Caffeine二级缓存，随机过期时间规避缓存雪崩，聚合查询优化DB访问频次</li>
+                        <li><strong>特色业务：</strong>以图搜图、颜色筛选、批量编辑；WebSocket实现多人实时在线协同编辑图片</li>
+                        <li><strong>AI集成：</strong>接入阿里云百炼大模型，异步轮询任务机制实现AI智能扩图，异步解耦避免接口阻塞</li>
+                        <li><strong>部署上线：</strong>Linux宝塔+Nginx反向代理部署上线，配置域名与跨域，保障线上稳定运行</li>
                     </ul>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <!--个人优势-->
+        <div class="resume-section">
+            <div class="section-title-bar">
+                <span class="title-blue-block"></span>
+                <span class="section-title-text">个人优势</span>
+            </div>
+            <div class="content-list">
+                <div class="content-item">• 自主学习能力强，能独立阅读 Spring AI 等官方文档快速掌握新技术；善于利用 Claude Code 等 AI 工具辅助学习；还借助了
+                    OpenClaw 持续跟进 AI大模型、Agent Skills 生态的最新发展</div>
+                <div class="content-item">• 具备AI Agent 开发能力，持续跟进AI+Java技术生态，可快速对接各类大模型API完成定制化AI功能开发</div>
+                <div class="content-item">• 擅长问题排查，善用搜索引擎、Github、AI工具自主定位bug，注重代码规范与项目稳定性优化</div>
+            </div>
+        </div>
     </div>
+    <script>
+        //打印PDF
+        document.onclick = function (e) {
+            if (e.target.id === 'printBtn') window.print();
+        }
+    </script>
 </body>
 
 </html>
